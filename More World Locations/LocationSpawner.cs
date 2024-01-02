@@ -14,6 +14,7 @@ namespace MoreWorldLocations
     {
 
         private LootManager LootManager = new LootManager();
+        private CreatureAdder CreatureAdder = new CreatureAdder();
 
         public AssetBundle locationsBundle;
         public GameObject Ruins_warp_1_Prefab;
@@ -71,6 +72,10 @@ namespace MoreWorldLocations
             DropTable ruins1DropTable = LootManager.CreateDropTable(ruins1Loot, 1, 3, 1f);
 
             LootManager.AddContainerToChild(Ruins_warp_1_Prefab, "loot_chest_wood", ruins1DropTable);
+
+            GameObject skeletonPrefab = PrefabManager.Cache.GetPrefab<GameObject>("Skeleton");
+
+            CreatureAdder.AddCreatureSpawnerToChild(Ruins_warp_1_Prefab, "Ruins1_Spawner1", skeletonPrefab);
 
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins_warp_1_Prefab, fixReference: false, Ruin1Config));
 

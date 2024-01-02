@@ -43,6 +43,10 @@ public class LootManager : MonoBehaviour
         return newDropTable;
     }
 
+    // Set up chest effects
+    GameObject chestOpenEffect = PrefabManager.Cache.GetPrefab<GameObject>("sfx_chest_open");
+    GameObject chestCloseEffect = PrefabManager.Cache.GetPrefab<GameObject>("sfx_chest_close");
+
     public void AddContainerToChild(GameObject parentGameObject, string childName, DropTable dropTable)
     {
         // Find the child GameObject by name
@@ -54,9 +58,17 @@ public class LootManager : MonoBehaviour
             // Add the Container component to the child GameObject
             Container container = childTransform.gameObject.AddComponent<Container>();
 
-            // Configure the container's DropTable
+            // Configure the Container properties
             container.m_defaultItems = dropTable;
             container.m_name = "Chest";
+            container.m_openEffects.m_effectPrefabs = new EffectList.EffectData[]
+                {
+                    new EffectList.EffectData { m_prefab = chestOpenEffect },
+                };
+            container.m_closeEffects.m_effectPrefabs = new EffectList.EffectData[]
+                {
+                    new EffectList.EffectData { m_prefab = chestCloseEffect },
+                };
         }
         else
         {

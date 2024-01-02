@@ -112,6 +112,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreatureAdder.cs" />
     <Compile Include="LocationSpawner.cs" />
     <Compile Include="LootManager.cs" />
     <Compile Include="Properties\IgnoreAccessModifiers.cs" />
