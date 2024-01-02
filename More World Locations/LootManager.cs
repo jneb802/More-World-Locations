@@ -19,7 +19,8 @@ public class LootManager : MonoBehaviour
         foreach (var itemName in itemNames)
         {
             // Use Jotunn's PrefabManager to get the prefab for the item
-            GameObject itemPrefab = PrefabManager.Instance.GetPrefab(itemName);
+            // GameObject itemPrefab = PrefabManager.Instance.GetPrefab(itemName);
+            GameObject itemPrefab = PrefabManager.Cache.GetPrefab<GameObject>(itemName);
 
             if (itemPrefab != null)
             {
@@ -43,10 +44,6 @@ public class LootManager : MonoBehaviour
         return newDropTable;
     }
 
-    // Set up chest effects
-    GameObject chestOpenEffect = PrefabManager.Cache.GetPrefab<GameObject>("sfx_chest_open");
-    GameObject chestCloseEffect = PrefabManager.Cache.GetPrefab<GameObject>("sfx_chest_close");
-
     public void AddContainerToChild(GameObject parentGameObject, string childName, DropTable dropTable)
     {
         // Find the child GameObject by name
@@ -61,14 +58,7 @@ public class LootManager : MonoBehaviour
             // Configure the Container properties
             container.m_defaultItems = dropTable;
             container.m_name = "Chest";
-            container.m_openEffects.m_effectPrefabs = new EffectList.EffectData[]
-                {
-                    new EffectList.EffectData { m_prefab = chestOpenEffect },
-                };
-            container.m_closeEffects.m_effectPrefabs = new EffectList.EffectData[]
-                {
-                    new EffectList.EffectData { m_prefab = chestCloseEffect },
-                };
+
         }
         else
         {
