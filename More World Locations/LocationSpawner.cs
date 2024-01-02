@@ -3,16 +3,21 @@ using Jotunn.Configs;
 using Jotunn.Entities;
 using Jotunn.Managers;
 using Jotunn.Utils;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using static DropTable;
 
 namespace MoreWorldLocations
 {
     internal class LocationSpawner
     {
 
+        private LootManager LootManager = new LootManager();
+
         public AssetBundle locationsBundle;
         public GameObject Ruins_warp_1_Prefab;
+
         public void LoadAssets()
         {
             locationsBundle = AssetUtils.LoadAssetBundleFromResources("moreworldlocations_bundle");
@@ -43,9 +48,13 @@ namespace MoreWorldLocations
             Biome = Heightmap.Biome.Meadows,
             Quantity = 100,
             Priotized = true,
-            ExteriorRadius = 2f,
-            ClearArea = true
-
+            ExteriorRadius = 10f,
+            ClearArea = true,
+            RandomRotation = true,
+            Group = "Ruins",
+            MinDistanceFromSimilar = 1000f,
+            MaxTerrainDelta = 1f,
+            MinAltitude = 0f
         };
 
         public void AddLocations()
@@ -56,6 +65,12 @@ namespace MoreWorldLocations
                 Jotunn.Logger.LogError("One or more location prefabs are not loaded.");
                 return;
             }
+
+            List<string> ruins1Loot = new List<string> { "Wood", "Stone" }; // Example items
+
+            DropTable ruins1DropTable = LootManager.CreateDropTable(ruins1Loot, 1, 3, 1f);
+
+            LootManager.AddContainerToChild(Ruins_warp_1_Prefab, "loot_chest_wood", ruins1DropTable);
 
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins_warp_1_Prefab, fixReference: false, Ruin1Config));
 

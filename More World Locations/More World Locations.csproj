@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LocationSpawner.cs" />
+    <Compile Include="LootManager.cs" />
     <Compile Include="Properties\IgnoreAccessModifiers.cs" />
     <Compile Include="More World Locations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
