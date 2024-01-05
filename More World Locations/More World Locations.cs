@@ -23,16 +23,27 @@ namespace MoreWorldLocations
 
         private void Awake()
         {
-            locationSpawner = new LocationSpawner();
-            locationSpawner.LoadAssets();
-            locationSpawner.AddLocations();
+
+
+            PrefabManager.OnVanillaPrefabsAvailable += OnPrefabsAvailable;
 
             Jotunn.Logger.LogInfo("MoreWorldLocations has loaded");
 
 
         }
-        
 
-        
+        private void OnPrefabsAvailable()
+        {
+
+            locationSpawner = new LocationSpawner();
+            locationSpawner.LoadAssets();
+            locationSpawner.AddLocations();
+
+
+            PrefabManager.OnVanillaPrefabsAvailable -= OnPrefabsAvailable;
+        }
+
+
+
     }
 }

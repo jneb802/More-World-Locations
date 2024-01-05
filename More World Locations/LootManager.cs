@@ -19,7 +19,6 @@ public class LootManager : MonoBehaviour
         foreach (var itemName in itemNames)
         {
             // Use Jotunn's PrefabManager to get the prefab for the item
-            // GameObject itemPrefab = PrefabManager.Instance.GetPrefab(itemName);
             GameObject itemPrefab = PrefabManager.Cache.GetPrefab<GameObject>(itemName);
 
             if (itemPrefab != null)
@@ -58,6 +57,8 @@ public class LootManager : MonoBehaviour
             // Configure the Container properties
             container.m_defaultItems = dropTable;
             container.m_name = "Chest";
+            container.m_width = 4;
+            container.m_height = 2;
 
         }
         else
