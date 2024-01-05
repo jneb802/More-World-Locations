@@ -7,13 +7,13 @@ using Jotunn.Managers;
 public class LootManager : MonoBehaviour
 {
     // Method to create a DropTable with specified parameters
-    public DropTable CreateDropTable(List<string> itemNames, int dropMin, int dropMax, float dropChance)
+    public DropTable CreateDropTable(List<string> itemNames, int dropMin, int dropMax)
     {
         DropTable newDropTable = new DropTable
         {
             m_dropMin = dropMin,
             m_dropMax = dropMax,
-            m_dropChance = dropChance
+            m_dropChance = 1.0f
         };
 
         foreach (var itemName in itemNames)
@@ -26,9 +26,9 @@ public class LootManager : MonoBehaviour
                 DropData dropData = new DropData
                 {
                     m_item = itemPrefab,
-                    m_stackMin = 1, // Assuming stack size is 1 for simplicity
-                    m_stackMax = 1,
-                    m_weight = 1,   // Assuming equal weight for all items
+                    m_stackMin = 1,
+                    m_stackMax = 3,
+                    m_weight = 1.0f,   // Assuming equal weight for all items
                     m_dontScale = false
                 };
 
