@@ -17,7 +17,7 @@ namespace MoreWorldLocations
             }
             else
             {
-                Debug.LogWarning($"Prefab not found for name: {prefabName}");
+                Debug.LogWarning($"MoreWorldLocations: Prefab not found for name: {prefabName}");
                 return null;
             }
         }
@@ -48,7 +48,7 @@ namespace MoreWorldLocations
             }
             else
             {
-                Debug.LogError("Child GameObject not found: " + childName);
+                Debug.LogError("MoreWorldLocations: Child GameObject (" + childName + ") not found in parent GameObject (" + parentGameObject + ")");
             }
         }
 

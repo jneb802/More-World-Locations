@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using static DropTable;
 using System.ComponentModel;
 using Jotunn.Managers;
+using BepInEx.Logging;
 
 public class LootManager : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class LootManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Prefab for {itemName} not found.");
+                Debug.LogWarning($"MoreWorldLocations: Prefab for {itemName} not found.");
             }
         }
 
@@ -63,7 +64,7 @@ public class LootManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Child GameObject not found: " + childName);
+            Debug.LogError("MoreWorldLocations: Child GameObject (" + childName + ") not found in parent GameObject (" + parentGameObject + ")");
         }
     }
 

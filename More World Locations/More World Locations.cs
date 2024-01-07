@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using HarmonyLib;
 using Jotunn.Configs;
 using Jotunn.Entities;
 using Jotunn.Managers;
@@ -18,6 +19,7 @@ namespace MoreWorldLocations
         public const string PluginVersion = "1.0.0";
 
         private LocationSpawner locationSpawner;
+        private RunestoneManager runestoneManager;
 
         public static CustomLocalization Localization = LocalizationManager.Instance.GetLocalization();
 
@@ -29,6 +31,15 @@ namespace MoreWorldLocations
 
             Jotunn.Logger.LogInfo("MoreWorldLocations has loaded");
 
+            // Apply Harmony patches
+            var harmony = new Harmony(PluginGUID);
+            //harmony.PatchAll();
+
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            harmony.PatchAll(assembly);
+
+            
+
 
         }
 
@@ -38,6 +49,9 @@ namespace MoreWorldLocations
             locationSpawner = new LocationSpawner();
             locationSpawner.LoadAssets();
             locationSpawner.AddLocations();
+
+            RunestoneManager.AddlocalizationsEnglish();
+            RunestoneManager.JSONS();
 
 
             PrefabManager.OnVanillaPrefabsAvailable -= OnPrefabsAvailable;
