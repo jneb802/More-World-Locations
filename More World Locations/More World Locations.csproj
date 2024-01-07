@@ -15,7 +15,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
-    <LangVersion>10</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -119,7 +119,7 @@
     <Compile Include="Properties\IgnoreAccessModifiers.cs" />
     <Compile Include="More World Locations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RunestoneManager.cs" />
+    <Compile Include="TextManager.cs" />
     <Compile Include="RustyCommand.cs" />
   </ItemGroup>
   <ItemGroup>

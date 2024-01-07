@@ -19,9 +19,9 @@ namespace MoreWorldLocations
         public const string PluginVersion = "1.0.0";
 
         private LocationSpawner locationSpawner;
-        private RunestoneManager runestoneManager;
+        private TextManager textManager;
 
-        public static CustomLocalization Localization = LocalizationManager.Instance.GetLocalization();
+        public static CustomLocalization Localization = Jotunn.Managers.LocalizationManager.Instance.GetLocalization();
 
         private void Awake()
         {
@@ -50,9 +50,9 @@ namespace MoreWorldLocations
             locationSpawner.LoadAssets();
             locationSpawner.AddLocations();
 
-            runestoneManager = new RunestoneManager();
-            runestoneManager.AddlocalizationsEnglish();
-            //RunestoneManager.JSONS();
+            textManager = new TextManager();
+            textManager.AddlocalizationsEnglish();
+            //textManager.JSONS();
 
 
             PrefabManager.OnVanillaPrefabsAvailable -= OnPrefabsAvailable;
