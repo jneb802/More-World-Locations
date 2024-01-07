@@ -66,8 +66,6 @@ namespace MoreWorldLocations
 
         #endregion
 
-        
-
         public void AddLocations()
         {
             // Ensure all prefabs are loaded
@@ -83,12 +81,12 @@ namespace MoreWorldLocations
             #region Ruins1
             DropTable ruins1DropTable = LootManager.CreateDropTable(meadowsLoot1, 1, 3);
             LootManager.AddContainerToChild(Ruins1_Prefab, "loot_chest_wood", ruins1DropTable);
-            MaterialReplacer.RegisterGameObjectForMatSwap(Ruins1_Prefab.gameObject);
-            MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins1_Prefab.gameObject, MaterialReplacer.ShaderType.UseUnityShader); 
-            ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins1_Prefab, fixReference: false, new LocationConfig
+            //MaterialReplacer.RegisterGameObjectForMatSwap(Ruins1_Prefab.gameObject);
+            //MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins1_Prefab.gameObject, MaterialReplacer.ShaderType.UseUnityShader); 
+            ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins1_Prefab, fixReference: true, new LocationConfig
             {
                 Biome = Heightmap.Biome.Meadows,
-                Quantity = 1,
+                Quantity = 100,
                 Priotized = true,
                 ExteriorRadius = 10f,
                 ClearArea = true,

@@ -50,8 +50,9 @@ namespace MoreWorldLocations
             locationSpawner.LoadAssets();
             locationSpawner.AddLocations();
 
-            RunestoneManager.AddlocalizationsEnglish();
-            RunestoneManager.JSONS();
+            runestoneManager = new RunestoneManager();
+            runestoneManager.AddlocalizationsEnglish();
+            //RunestoneManager.JSONS();
 
 
             PrefabManager.OnVanillaPrefabsAvailable -= OnPrefabsAvailable;

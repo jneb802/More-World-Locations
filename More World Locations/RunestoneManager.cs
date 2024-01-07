@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace MoreWorldLocations
 {
-    public class RunestoneManager
+    internal class RunestoneManager
     {
         public static CustomLocalization Localization = LocalizationManager.Instance.GetLocalization();
 
@@ -20,12 +20,16 @@ namespace MoreWorldLocations
             Localization = LocalizationManager.Instance.GetLocalization();
             Localization.AddTranslation("English", new Dictionary<string, string>
             {
-              {"GoldOre_warp", "Gold ore" },
-              { "GoldOre_desc_warp", "Unrefined gold. Use a smelter to refine into gold coins." },
-              { "GoldDeposit_warp", "Gold" },
-              { "IronDeposit_warp", "Iron" },
-              { "SilverDepositSmall_warp", "Silver" },
-              { "BlackmetalDeposit_warp", "Blackmetal" }
+              { "MWL_runestone", "Runestone" },
+              { "Hjortkult_Topic_1", "this is a topic 1" },
+              { "Hjortkult_Label_1", "this is a label 1" },
+              { "Hjortkult_Text_1", "this is a text 1" },
+              { "Hjortkult_Topic_2", "this is a topic 2" },
+              { "Hjortkult_Label_2", "this is a label 2" },
+              { "Hjortkult_Text_2", "this is a text 2" },
+              { "Hjortkult_Topic_3", "this is a topic 3" },
+              { "Hjortkult_Label_3", "this is a label 3" },
+              { "Hjortkult_Text_3", "this is a text 3" },
             });
         }
 
