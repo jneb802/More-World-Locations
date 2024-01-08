@@ -121,6 +121,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextManager.cs" />
     <Compile Include="RustyCommand.cs" />
+    <Compile Include="UnityScriptAdder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

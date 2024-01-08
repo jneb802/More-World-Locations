@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using Jotunn.Configs;
 using Jotunn.Entities;
+using Jotunn.Extensions;
 using Jotunn.Managers;
 using Jotunn.Utils;
 using PieceManager;
@@ -16,6 +17,7 @@ namespace MoreWorldLocations
 
         private LootManager LootManager = new LootManager();
         private CreatureAdder CreatureAdder = new CreatureAdder();
+        private UnityScriptAdder UnityScriptAdder = new UnityScriptAdder();
 
         public AssetBundle locationsBundle;
         public GameObject Ruins1_Prefab;
@@ -27,11 +29,11 @@ namespace MoreWorldLocations
         public GameObject RuinsChurch1_Prefab;
         public GameObject RuinsGarden1_Prefab;
         public GameObject RuinsGate1_Prefab;
-        public GameObject RuinsHill1_Prefab;
-        public GameObject RuinsTower2_Prefab;
         public GameObject RuinsTower3_Prefab;
         public GameObject Shrine1_Prefab;
         public GameObject Tavern1_Prefab;
+        public GameObject Cave1_Prefab;
+        public GameObject RuinsArena2_Prefab;
 
         public void LoadAssets()
         {
@@ -45,11 +47,11 @@ namespace MoreWorldLocations
             RuinsChurch1_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_RuinsChurch1");
             RuinsGarden1_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_RuinsGarden1");
             RuinsGate1_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_RuinsGate1");
-            RuinsHill1_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_RuinsHill1");
-            RuinsTower2_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_RuinsTower2");
             RuinsTower3_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_RuinsTower3");
             Shrine1_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_Shrine1");
             Tavern1_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_Tavern1");
+            Cave1_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_Cave1");
+            RuinsArena2_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_RuinsArena2");
 
             LogResourceNamesAndCheckErrors();
         }
@@ -71,101 +73,122 @@ namespace MoreWorldLocations
             // Ensure all prefabs are loaded
             if (Ruins1_Prefab == null || Ruins2_Prefab == null || Ruins3_Prefab == null ||
                 RuinsArena1_Prefab == null || RuinsCastle1_Prefab == null || RuinsChurch1_Prefab == null || RuinsGarden1_Prefab == null ||
-                RuinsGate1_Prefab == null || RuinsHill1_Prefab == null || RuinsTower2_Prefab == null || 
-                RuinsTower3_Prefab == null || Shrine1_Prefab == null || Tavern1_Prefab == null)
+                RuinsGate1_Prefab == null || RuinsTower3_Prefab == null || Shrine1_Prefab == null || Tavern1_Prefab == null || Cave1_Prefab == null)
             {
                 Jotunn.Logger.LogError("One or more location prefabs are not loaded.");
                 return;
             }
 
             #region Ruins1
-            DropTable ruins1DropTable = LootManager.CreateDropTable(meadowsLoot1, 1, 3);
-            LootManager.AddContainerToChild(Ruins1_Prefab, "loot_chest_wood", ruins1DropTable);
+            DropTable ruins1DropTable = UnityScriptAdder.CreateDropTable(meadowsLoot1, 2, 3);
+            UnityScriptAdder.AddContainerToChild(Ruins1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", ruins1DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(Ruins1_Prefab.gameObject);
-            MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins1_Prefab.gameObject, MaterialReplacer.ShaderType.UseUnityShader); 
+            // MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
+            // MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins1_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.UseUnityShader);
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins1_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.Meadows,
-                Quantity = 100,
+                Quantity = 50,
                 Priotized = true,
-                ExteriorRadius = 10f,
+                ExteriorRadius = 5f,
                 ClearArea = true,
                 RandomRotation = true,
-                // Group = "Ruins",
-                MinDistanceFromSimilar = 1000f,
                 MaxTerrainDelta = 1f,
-                MinAltitude = 0f
+                MinAltitude = 0f,
+                InForest = true,
+                ForestTresholdMin = 0,
+                ForestTrasholdMax = 1,
+
             }));
             #endregion
 
             #region Ruins2
-            DropTable ruins2DropTable = LootManager.CreateDropTable(meadowsLoot2, 1, 3);
-            LootManager.AddContainerToChild(Ruins2_Prefab, "loot_chest_wood", ruins2DropTable);
+            DropTable ruins2DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
+            LootManager.AddContainerToChild(Ruins2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", ruins2DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(Ruins2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             CreatureAdder.AddCreatureSpawnerToChild(Ruins2_Prefab, "MWL_Ruins2_Spawner1", "Draugr");
             CreatureAdder.AddCreatureSpawnerToChild(Ruins2_Prefab, "MWL_Ruins2_Spawner2", "Draugr");
             CreatureAdder.AddCreatureSpawnerToChild(Ruins2_Prefab, "MWL_Ruins2_Spawner3", "Draugr");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins2_Prefab, fixReference: false, new LocationConfig
-                {
-                    Biome = Heightmap.Biome.Meadows,
-                    Quantity = 100,
-                    Priotized = true,
-                    ExteriorRadius = 10f,
-                    ClearArea = true,
-                    RandomRotation = true,
-                    // Group = "Ruins",
-                    MinDistanceFromSimilar = 1000f,
-                    MaxTerrainDelta = 1f,
-                    MinAltitude = 0f,
-                    MinDistance = 1000f
-                }));
+            {
+                Biome = Heightmap.Biome.Meadows,
+                Quantity = 50,
+                Priotized = true,
+                ExteriorRadius = 7.5f,
+                ClearArea = true,
+                RandomRotation = true,
+                // Group = "Ruins",
+                //MinDistanceFromSimilar = 1000f,
+                MaxTerrainDelta = 1f,
+                MinAltitude = 0f,
+                MinDistance = 750f,
+                InForest = false,
+                ForestTresholdMin = 2,
+                // ForestTrasholdMax = 1,
+
+            }));
             #endregion
 
             #region Ruins3
-            DropTable ruins3DropTable = LootManager.CreateDropTable(meadowsLoot1, 1, 3);
-            LootManager.AddContainerToChild(Ruins3_Prefab, "loot_chest_wood", ruins3DropTable);
+            DropTable ruins3DropTable = LootManager.CreateDropTable(meadowsLoot1, 2, 3);
+            LootManager.AddContainerToChild(Ruins3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", ruins3DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(Ruins3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             CreatureAdder.AddCreatureSpawnerToChild(Ruins3_Prefab, "MWL_Ruins3_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(Ruins3_Prefab, "MWL_Ruins3_Spawner2", "Skeleton");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins3_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.Meadows, // Modify as needed
-                Quantity = 1,
+                Quantity = 25,
                 Priotized = true,
-                ExteriorRadius = 10f,
+                ExteriorRadius = 5f,
                 ClearArea = true,
                 RandomRotation = true,
                 // Group = "Ruins",
-                MinDistanceFromSimilar = 1000f,
+                //MinDistanceFromSimilar = 1000f,
                 MaxTerrainDelta = 1f,
-                MinAltitude = 0f
+                MinAltitude = 0f,
+                InForest = false,
+                ForestTresholdMin = 1.5f,
+                // ForestTrasholdMax = 1,
+
             }));
             #endregion
 
             #region Ruins4
             DropTable ruins4DropTable = LootManager.CreateDropTable(blackforestLoot1, 1, 3);
-            LootManager.AddContainerToChild(Ruins4_Prefab, "loot_chest_wood", ruins4DropTable);
+            LootManager.AddContainerToChild(Ruins4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", ruins4DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(Ruins4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             CreatureAdder.AddCreatureSpawnerToChild(Ruins4_Prefab, "MWL_Ruins4_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(Ruins4_Prefab, "MWL_Ruins4_Spawner2", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(Ruins4_Prefab, "MWL_Ruins4_Spawner3", "Skeleton");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins4_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.BlackForest, // Modify as needed
-                Quantity = 1,
+                Quantity = 50,
                 Priotized = true,
-                ExteriorRadius = 10f,
+                ExteriorRadius = 5f,
                 ClearArea = true,
                 RandomRotation = true,
                 // Group = "Ruins",
-                MinDistanceFromSimilar = 1000f,
+                //MinDistanceFromSimilar = 1000f,
                 MaxTerrainDelta = 1f,
-                MinAltitude = 0f
+                MinAltitude = 0f,
+                InForest = true,
+                ForestTresholdMin = 0,
+                ForestTrasholdMax = 1,
+
             }));
             #endregion
 
             #region RuinsArena1
-            DropTable ruinsArena1DropTable = LootManager.CreateDropTable(meadowsLoot2, 1, 3);
-            LootManager.AddContainerToChild(RuinsArena1_Prefab, "loot_chest_wood", ruinsArena1DropTable);
-            MaterialReplacer.RegisterGameObjectForMatSwap(RuinsArena1_Prefab.gameObject);
-            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena1_Prefab.gameObject, MaterialReplacer.ShaderType.UseUnityShader);
+            DropTable ruinsArena1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
+            LootManager.AddContainerToChild(RuinsArena1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", ruinsArena1DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(RuinsArena1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena1_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena1_Prefab, "MWL_RuinsArena1_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena1_Prefab, "MWL_RuinsArena1_Spawner2", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena1_Prefab, "MWL_RuinsArena1_Spawner3", "Skeleton");
@@ -174,154 +197,136 @@ namespace MoreWorldLocations
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsArena1_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.Meadows, // Modify as needed
-                Quantity = 100,
+                Quantity = 50,
                 Priotized = true,
                 ExteriorRadius = 10f,
                 ClearArea = true,
                 RandomRotation = true,
                 // Group = "Ruins",
-                MinDistanceFromSimilar = 1000f,
+                // MinDistanceFromSimilar = 1000f,
                 MaxTerrainDelta = 1f,
-                MinAltitude = 0f
+                MinAltitude = 0f,
+                InForest = false,
+                //ForestTrasholdMax = 1,
+                ForestTresholdMin = 2,
             }));
             #endregion
 
             #region RuinsCastle1
-            DropTable ruinsCastle1DropTable = LootManager.CreateDropTable(blackforestLoot1, 1, 3);
-            LootManager.AddContainerToChild(RuinsCastle1_Prefab, "loot_chest_wood", ruinsCastle1DropTable);
+            DropTable ruinsCastle1DropTable = LootManager.CreateDropTable(blackforestLoot1, 2, 3);
+            LootManager.AddContainerToChild(RuinsCastle1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", ruinsCastle1DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(RuinsCastle1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsCastle1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCastle1_Prefab, "MWL_RuinsCastle1_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCastle1_Prefab, "MWL_RuinsCastle1_Spawner2", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCastle1_Prefab, "MWL_RuinsCastle1_Spawner3", "Skeleton");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsCastle1_Prefab, fixReference: false, new LocationConfig
             {
-                Biome = Heightmap.Biome.Meadows, // Modify as needed
-                Quantity = 1,
+                Biome = Heightmap.Biome.BlackForest,
+                Quantity = 50,
                 Priotized = true,
-                ExteriorRadius = 10f,
+                ExteriorRadius = 5f,
                 ClearArea = true,
                 RandomRotation = true,
                 // Group = "Ruins",
-                MinDistanceFromSimilar = 1000f,
+                // MinDistanceFromSimilar = 1000f,
                 MaxTerrainDelta = 1f,
-                MinAltitude = 0f
+                MinAltitude = 0f,
+                InForest = true,
+                ForestTrasholdMax = 1,
+                ForestTresholdMin = 0,
             }));
             #endregion
 
             #region RuinsChurch1
-            DropTable ruinsChurch1DropTable = LootManager.CreateDropTable(churchLoot1, 1, 3);
-            LootManager.AddContainerToChild(RuinsCastle1_Prefab, "loot_chest_wood", ruinsChurch1DropTable);
+            DropTable ruinsChurch1DropTable = LootManager.CreateDropTable(churchLoot1, 2, 4);
+            LootManager.AddContainerToChild(RuinsChurch1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", ruinsChurch1DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(RuinsChurch1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsChurch1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             CreatureAdder.AddCreatureSpawnerToChild(RuinsChurch1_Prefab, "MWL_RuinsChurch1_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsChurch1_Prefab, "MWL_RuinsChurch1_Spawner2", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsChurch1_Prefab, "MWL_RuinsChurch1_Spawner3", "Skeleton");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsChurch1_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.Meadows, // Modify as needed
-                Quantity = 1,
+                Quantity = 50,
                 Priotized = true,
                 ExteriorRadius = 10f,
                 ClearArea = true,
                 RandomRotation = true,
                 // Group = "Ruins",
-                MinDistanceFromSimilar = 1000f,
+                // MinDistanceFromSimilar = 1000f,
                 MaxTerrainDelta = 1f,
-                MinAltitude = 0f
+                MinAltitude = 0f,
+                InForest = true,
+                ForestTrasholdMax = 1,
+                ForestTresholdMin = 0,
             }));
             #endregion
 
             #region RuinsGarden1
-            DropTable ruinsGarden1DropTable = LootManager.CreateDropTable(swampLoot1, 1, 3);
-            LootManager.AddContainerToChild(RuinsGarden1_Prefab, "loot_chest_stone", ruinsGarden1DropTable);
+            DropTable ruinsGarden1DropTable = LootManager.CreateDropTable(swampLoot1, 2, 4);
+            LootManager.AddContainerToChild(RuinsGarden1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone", ruinsGarden1DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(RuinsGarden1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsGarden1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsGarden1_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.CustomCreature);
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsGarden1_Prefab, fixReference: false, new LocationConfig
             {
-                Biome = Heightmap.Biome.Swamp, // Modify as needed
-                Quantity = 100,
+                Biome = Heightmap.Biome.Swamp,
+                Quantity = 50,
                 Priotized = true,
                 ExteriorRadius = 10f,
                 ClearArea = true,
                 RandomRotation = true,
                 // Group = "Ruins",
-                MinDistanceFromSimilar = 1000f,
+                // MinDistanceFromSimilar = 1000f,
                 MaxTerrainDelta = 1f,
                 MinAltitude = 0f
             }));
             #endregion
 
             #region RuinsGate1
-            DropTable ruinsGate1DropTable = LootManager.CreateDropTable(blackforestLoot1, 1, 3);
-            LootManager.AddContainerToChild(RuinsGate1_Prefab, "loot_chest_stone", ruinsGate1DropTable);
+            DropTable ruinsGate1DropTable = LootManager.CreateDropTable(blackforestLoot1, 2, 3);
+            LootManager.AddContainerToChild(RuinsGate1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone", ruinsGate1DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(RuinsGate1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            //MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsGate1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             CreatureAdder.AddCreatureSpawnerToChild(RuinsGate1_Prefab, "MWL_RuinsGate1_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsGate1_Prefab, "MWL_RuinsGate1_Spawner2", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsGate1_Prefab, "MWL_RuinsGate1_Spawner3", "Skeleton");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsGate1_Prefab, fixReference: false, new LocationConfig
             {
-                Biome = Heightmap.Biome.Meadows, // Modify as needed
-                Quantity = 100,
+                Biome = Heightmap.Biome.BlackForest,
+                Quantity = 25,
                 Priotized = true,
-                ExteriorRadius = 10f,
+                ExteriorRadius = 5f,
                 ClearArea = true,
                 RandomRotation = true,
                 // Group = "Ruins",
-                MinDistanceFromSimilar = 1000f,
+                // MinDistanceFromSimilar = 1000f,
                 MaxTerrainDelta = 1f,
-                MinAltitude = 0f
+                MinAltitude = 50f
             }));
             #endregion
 
-            #region RuinsHill1
-            DropTable ruinsHill1DropTable = LootManager.CreateDropTable(shrineEikLoot1, 1, 3);
-            LootManager.AddContainerToChild(RuinsHill1_Prefab, "loot_chest_wood", ruinsHill1DropTable);
-            ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsHill1_Prefab, fixReference: false, new LocationConfig
-            {
-                Biome = Heightmap.Biome.Meadows, // Modify as needed
-                Quantity = 100,
-                Priotized = true,
-                ExteriorRadius = 10f,
-                ClearArea = true,
-                RandomRotation = true,
-                // Group = "Ruins",
-                MinDistanceFromSimilar = 1000f,
-                MaxTerrainDelta = 1f,
-                MinAltitude = 0f
-            }));
-            #endregion
-
-            #region RuinsTower2
-            DropTable ruinsTower2DropTable = LootManager.CreateDropTable(swampLoot1, 1, 3);
-            LootManager.AddContainerToChild(RuinsTower2_Prefab, "loot_chest_wood", ruinsTower2DropTable);
-            CreatureAdder.AddCreatureSpawnerToChild(RuinsTower2_Prefab, "MWL_RuinsTower2_Spawner1", "Skeleton");
-            CreatureAdder.AddCreatureSpawnerToChild(RuinsTower2_Prefab, "MWL_RuinsTower2_Spawner2", "Skeleton");
-            CreatureAdder.AddCreatureSpawnerToChild(RuinsTower2_Prefab, "MWL_RuinsTower2_Spawner3", "Skeleton");
-            ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsTower2_Prefab, fixReference: false, new LocationConfig
-            {
-                Biome = Heightmap.Biome.Meadows, // Modify as needed
-                Quantity = 100,
-                Priotized = true,
-                ExteriorRadius = 10f,
-                ClearArea = true,
-                RandomRotation = true,
-                // Group = "Ruins",
-                MinDistanceFromSimilar = 1000f,
-                MaxTerrainDelta = 1f,
-                MinAltitude = 0f
-            }));
-            #endregion
 
             #region RuinsTower3
-            DropTable ruinsTower3DropTable = LootManager.CreateDropTable(blackforestLoot1, 1, 3);
-            LootManager.AddContainerToChild(RuinsTower3_Prefab, "loot_chest_wood", ruinsTower3DropTable);
+            DropTable ruinsTower3DropTable = LootManager.CreateDropTable(blackforestLoot1, 2, 3);
+            LootManager.AddContainerToChild(RuinsTower3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", ruinsTower3DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(RuinsTower3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsTower3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             CreatureAdder.AddCreatureSpawnerToChild(RuinsTower3_Prefab, "MWL_RuinsTower3_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsTower3_Prefab, "MWL_RuinsTower3_Spawner2", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsTower3_Prefab, "MWL_RuinsTower3_Spawner3", "Skeleton");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsTower3_Prefab, fixReference: false, new LocationConfig
             {
-                Biome = Heightmap.Biome.Meadows, // Modify as needed
-                Quantity = 100,
+                Biome = Heightmap.Biome.BlackForest, // Modify as needed
+                Quantity = 50,
                 Priotized = true,
-                ExteriorRadius = 10f,
+                ExteriorRadius = 7.5f,
                 ClearArea = true,
                 RandomRotation = true,
                 // Group = "Ruins",
-                MinDistanceFromSimilar = 1000f,
+                // MinDistanceFromSimilar = 1000f,
                 MaxTerrainDelta = 1f,
                 MinAltitude = 0f
             }));
@@ -331,31 +336,75 @@ namespace MoreWorldLocations
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(Shrine1_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.Meadows, // Modify as needed
-                Quantity = 100,
+                Quantity = 50,
                 Priotized = true,
-                ExteriorRadius = 10f,
+                ExteriorRadius = 5f,
                 ClearArea = true,
                 RandomRotation = true,
                 // Group = "Ruins",
                 MinDistanceFromSimilar = 1000f,
+                MaxDistance = 250f,
                 MaxTerrainDelta = 1f,
-                MinAltitude = 0f
+                MinAltitude = 0f,
+                InForest = false,
+                ForestTresholdMin = 1,
+                //ForestTrasholdMax = 1,
             }));
             #endregion
 
             #region Tavern1
-            DropTable tavern1DropTable = LootManager.CreateDropTable(tavernLoot1, 1, 3);
+            DropTable tavern1DropTable = LootManager.CreateDropTable(tavernLoot1, 2, 3);
             LootManager.AddContainerToChild(Tavern1_Prefab, "loot_chest_wood", tavern1DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(Tavern1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(Tavern1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
+            CreatureAdder.AddCreatureSpawnerToChild(Tavern1_Prefab, "MWL_Tavern1_Spawner1", "Greydwarf_Elite");
+            CreatureAdder.AddCreatureSpawnerToChild(Tavern1_Prefab, "MWL_Tavern1_Spawner2", "Greydwarf");
+            CreatureAdder.AddCreatureSpawnerToChild(Tavern1_Prefab, "MWL_Tavern1_Spawner3", "Greydwarf");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(Tavern1_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.Meadows, // Modify as needed
                 Quantity = 50, // Adjust as per requirement
                 Priotized = true,
-                ExteriorRadius = 15f,
+                ExteriorRadius = 10f,
                 ClearArea = true,
                 RandomRotation = true,
-                Group = "Tavern",
-                MinDistanceFromSimilar = 1500f,
+                // Group = "Tavern",
+                //MinDistanceFromSimilar = 1500f,
+                MinDistance = 500f,
+                MaxTerrainDelta = 2f,
+                MinAltitude = 0f
+            }));
+            #endregion
+
+            #region Cave1
+            ZoneManager.Instance.AddCustomLocation(new CustomLocation(Cave1_Prefab, fixReference: false, new LocationConfig
+            {
+                Biome = Heightmap.Biome.BlackForest, // Modify as needed
+                Quantity = 50, // Adjust as per requirement
+                Priotized = true,
+                ExteriorRadius = 10f,
+                ClearArea = true,
+                RandomRotation = true,
+                // Group = "Tavern",
+                //MinDistanceFromSimilar = 1500f,
+                MinDistance = 500f,
+                MaxTerrainDelta = 2f,
+                MinAltitude = 0f
+            }));
+            #endregion
+
+            #region RuinsArena2
+            ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsArena2_Prefab, fixReference: false, new LocationConfig
+            {
+                Biome = Heightmap.Biome.BlackForest, // Modify as needed
+                Quantity = 50, // Adjust as per requirement
+                Priotized = true,
+                ExteriorRadius = 10f,
+                ClearArea = true,
+                RandomRotation = true,
+                // Group = "Tavern",
+                //MinDistanceFromSimilar = 1500f,
+                MinDistance = 500f,
                 MaxTerrainDelta = 2f,
                 MinAltitude = 0f
             }));

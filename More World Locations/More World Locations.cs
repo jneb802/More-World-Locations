@@ -38,9 +38,6 @@ namespace MoreWorldLocations
             Assembly assembly = Assembly.GetExecutingAssembly();
             harmony.PatchAll(assembly);
 
-            
-
-
         }
 
         private void OnPrefabsAvailable()

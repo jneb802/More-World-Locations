@@ -38,15 +38,58 @@ namespace PieceManager
 
         public static void RegisterGameObjectForShaderSwap(GameObject go, ShaderType type)
         {
+            try
+            {
+                if (go == null)
+                {
+                    Debug.LogError("RegisterGameObjectForShaderSwap: GameObject is null");
+                    return;
+                }
+
+                if (ObjectsForShaderReplace.ContainsKey(go)) return;
+
+                ObjectsForShaderReplace.Add(go, type);
+                Debug.Log($"Registered GameObject for Shader Swap: {go.name}, ShaderType: {type}");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Error in RegisterGameObjectForShaderSwap with GameObject: {go?.name}. Exception: {ex.Message}");
+            }
+        }
+
+
+        /*public static void RegisterGameObjectForShaderSwap(GameObject go, ShaderType type)
+        {
             if (ObjectsForShaderReplace.ContainsKey(go)) return;
             ObjectsForShaderReplace.Add(go, type);
-        }
+        }*/
 
         public static void RegisterGameObjectForMatSwap(GameObject go, bool isJotunnMock = false)
         {
+            try
+            {
+                if (go == null)
+                {
+                    Debug.LogError("RegisterGameObjectForMatSwap: GameObject is null");
+                    return;
+                }
+
+                if (ObjectToSwap.ContainsKey(go)) return;
+                ObjectToSwap.Add(go, isJotunnMock);
+
+                Debug.Log($"Registered GameObject for Material Swap: {go.name}");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Error in RegisterGameObjectForMatSwap with GameObject: {go?.name}. Exception: {ex.Message}");
+            }
+        }
+
+        /*public static void RegisterGameObjectForMatSwap(GameObject go, bool isJotunnMock = false)
+        {
             if (ObjectToSwap.ContainsKey(go)) return;
             ObjectToSwap.Add(go, isJotunnMock);
-        }
+        }*/
 
         private static void GetAllMaterials()
         {
@@ -54,7 +97,6 @@ namespace PieceManager
             foreach (Material item in allMats)
             {
                 OriginalMaterials[item.name] = item;
-                if (item.name == "FireTree_oldlog") { Debug.LogWarning("Found FireTree_oldlog"); }
             }
         }
 
