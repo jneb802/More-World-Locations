@@ -8,7 +8,7 @@ using PieceManager;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-using static DropTable;
+using static MoreWorldLocations.LocationSpawner;
 
 namespace MoreWorldLocations
 {
@@ -65,7 +65,6 @@ namespace MoreWorldLocations
         List<string> churchLoot1 = new List<string> { "FineWood", "AmberPearl", "SilverNecklace", "Bronze" };
         List<string> blackforestLoot1 = new List<string> { "ArrowBronze", "CopperOre", "Amber", "Ruby", "AmberPearl", "Coins", "BoneFragments" };
         List<string> swampLoot1 = new List<string> { "Amber", "AmberPearl", "Ruby", "Chain", "ElderBark", "IronScrap", "WitheredBone" };
-
         #endregion
 
         public void AddLocations()
@@ -88,13 +87,17 @@ namespace MoreWorldLocations
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins1_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.Meadows,
-                Quantity = 50,
+                Quantity = 25,
                 Priotized = true,
                 ExteriorRadius = 5f,
                 ClearArea = true,
                 RandomRotation = true,
+                Group = "Ruins_small",
+                MinDistanceFromSimilar = 128,
                 MaxTerrainDelta = 1f,
                 MinAltitude = 0f,
+                // MinDistance = 0,
+                MaxDistance = 500,
                 InForest = true,
                 ForestTresholdMin = 0,
                 ForestTrasholdMax = 1,
@@ -113,19 +116,21 @@ namespace MoreWorldLocations
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins2_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.Meadows,
-                Quantity = 50,
+                Quantity = 25,
                 Priotized = true,
                 ExteriorRadius = 7.5f,
                 ClearArea = true,
                 RandomRotation = true,
-                // Group = "Ruins",
-                //MinDistanceFromSimilar = 1000f,
+                Group = "Ruins_medium",
+                MinDistanceFromSimilar = 128,
                 MaxTerrainDelta = 1f,
                 MinAltitude = 0f,
-                MinDistance = 750f,
+                MinDistance = 500,
+                MaxDistance = 2000,
                 InForest = false,
                 ForestTresholdMin = 2,
                 // ForestTrasholdMax = 1,
+                //SnapToWater = false,
 
             }));
             #endregion
@@ -145,10 +150,12 @@ namespace MoreWorldLocations
                 ExteriorRadius = 5f,
                 ClearArea = true,
                 RandomRotation = true,
-                // Group = "Ruins",
-                //MinDistanceFromSimilar = 1000f,
+                Group = "Ruins_small",
+                MinDistanceFromSimilar = 128,
                 MaxTerrainDelta = 1f,
                 MinAltitude = 0f,
+                //MinDistance = 500,
+                MaxDistance = 500,
                 InForest = false,
                 ForestTresholdMin = 1.5f,
                 // ForestTrasholdMax = 1,
@@ -167,15 +174,17 @@ namespace MoreWorldLocations
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins4_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.BlackForest, // Modify as needed
-                Quantity = 50,
+                Quantity = 25,
                 Priotized = true,
                 ExteriorRadius = 5f,
                 ClearArea = true,
                 RandomRotation = true,
-                // Group = "Ruins",
-                //MinDistanceFromSimilar = 1000f,
+                Group = "Ruins_medium",
+                MinDistanceFromSimilar = 128,
                 MaxTerrainDelta = 1f,
                 MinAltitude = 0f,
+                MinDistance = 500,
+                MaxDistance = 2000,
                 InForest = true,
                 ForestTresholdMin = 0,
                 ForestTrasholdMax = 1,
@@ -197,18 +206,20 @@ namespace MoreWorldLocations
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsArena1_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.Meadows, // Modify as needed
-                Quantity = 50,
+                Quantity = 25,
                 Priotized = true,
                 ExteriorRadius = 10f,
                 ClearArea = true,
                 RandomRotation = true,
-                // Group = "Ruins",
-                // MinDistanceFromSimilar = 1000f,
+                Group = "Ruins_medium",
+                MinDistanceFromSimilar = 128,
                 MaxTerrainDelta = 1f,
                 MinAltitude = 0f,
+                MinDistance = 1000,
+                MaxDistance = 2000,
                 InForest = false,
                 //ForestTrasholdMax = 1,
-                ForestTresholdMin = 2,
+                ForestTresholdMin = 3,
             }));
             #endregion
 
@@ -223,15 +234,17 @@ namespace MoreWorldLocations
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsCastle1_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.BlackForest,
-                Quantity = 50,
+                Quantity = 25,
                 Priotized = true,
                 ExteriorRadius = 5f,
                 ClearArea = true,
                 RandomRotation = true,
-                // Group = "Ruins",
-                // MinDistanceFromSimilar = 1000f,
+                Group = "Ruins_medium",
+                MinDistanceFromSimilar = 128,
                 MaxTerrainDelta = 1f,
                 MinAltitude = 0f,
+                MinDistance = 500,
+                MaxDistance = 2000,
                 InForest = true,
                 ForestTrasholdMax = 1,
                 ForestTresholdMin = 0,
@@ -249,15 +262,17 @@ namespace MoreWorldLocations
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsChurch1_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.Meadows, // Modify as needed
-                Quantity = 50,
+                Quantity = 25,
                 Priotized = true,
                 ExteriorRadius = 10f,
                 ClearArea = true,
                 RandomRotation = true,
-                // Group = "Ruins",
-                // MinDistanceFromSimilar = 1000f,
+                Group = "Ruins_church",
+                MinDistanceFromSimilar = 128,
                 MaxTerrainDelta = 1f,
                 MinAltitude = 0f,
+                MinDistance = 1000,
+                MaxDistance = 2000,
                 InForest = true,
                 ForestTrasholdMax = 1,
                 ForestTresholdMin = 0,
@@ -273,15 +288,17 @@ namespace MoreWorldLocations
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsGarden1_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.Swamp,
-                Quantity = 50,
+                Quantity = 25,
                 Priotized = true,
                 ExteriorRadius = 10f,
                 ClearArea = true,
                 RandomRotation = true,
-                // Group = "Ruins",
-                // MinDistanceFromSimilar = 1000f,
+                Group = "Ruins_garden",
+                MinDistanceFromSimilar = 256,
                 MaxTerrainDelta = 1f,
-                MinAltitude = 0f
+                MinAltitude = 0f,
+                //MinDistance = 500,
+                MaxDistance = 4000,
             }));
             #endregion
 
@@ -301,10 +318,12 @@ namespace MoreWorldLocations
                 ExteriorRadius = 5f,
                 ClearArea = true,
                 RandomRotation = true,
-                // Group = "Ruins",
-                // MinDistanceFromSimilar = 1000f,
+                Group = "Ruins_medium",
+                MinDistanceFromSimilar = 128,
                 MaxTerrainDelta = 1f,
-                MinAltitude = 50f
+                MinAltitude = 50,
+                MinDistance = 1000,
+                MaxDistance = 2000,
             }));
             #endregion
 
@@ -320,15 +339,17 @@ namespace MoreWorldLocations
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsTower3_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.BlackForest, // Modify as needed
-                Quantity = 50,
+                Quantity = 25,
                 Priotized = true,
                 ExteriorRadius = 7.5f,
                 ClearArea = true,
                 RandomRotation = true,
-                // Group = "Ruins",
-                // MinDistanceFromSimilar = 1000f,
+                Group = "Ruins_medium",
+                MinDistanceFromSimilar = 128,
                 MaxTerrainDelta = 1f,
-                MinAltitude = 0f
+                MinAltitude = 0f,
+                MinDistance = 1000,
+                MaxDistance = 2000,
             }));
             #endregion
 
@@ -368,11 +389,12 @@ namespace MoreWorldLocations
                 ExteriorRadius = 10f,
                 ClearArea = true,
                 RandomRotation = true,
-                // Group = "Tavern",
-                //MinDistanceFromSimilar = 1500f,
-                MinDistance = 500f,
-                MaxTerrainDelta = 2f,
-                MinAltitude = 0f
+                Group = "Ruins_tavern",
+                MinDistanceFromSimilar = 128,
+                MaxTerrainDelta = 1f,
+                MinAltitude = 0f,
+                MinDistance = 1000,
+                MaxDistance = 2000,
             }));
             #endregion
 
