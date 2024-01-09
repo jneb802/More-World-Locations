@@ -7,8 +7,11 @@ using Jotunn.Utils;
 using PieceManager;
 using System.Collections.Generic;
 using System.Reflection;
+using System.IO;
 using UnityEngine;
+using SimpleJson;
 using static MoreWorldLocations.LocationSpawner;
+
 
 namespace MoreWorldLocations
 {
@@ -67,6 +70,11 @@ namespace MoreWorldLocations
         List<string> swampLoot1 = new List<string> { "Amber", "AmberPearl", "Ruby", "Chain", "ElderBark", "IronScrap", "WitheredBone" };
         #endregion
 
+
+
+
+
+
         public void AddLocations()
         {
             // Ensure all prefabs are loaded
@@ -77,6 +85,9 @@ namespace MoreWorldLocations
                 Jotunn.Logger.LogError("One or more location prefabs are not loaded.");
                 return;
             }
+
+            string jsonString = File.ReadAllText("LocationConfigs.json");
+            var locationsDictionary = SimpleJson.SimpleJson.DeserializeObject<Dictionary<string, LocationConfig>>(jsonString);
 
             #region Ruins1
             DropTable ruins1DropTable = UnityScriptAdder.CreateDropTable(meadowsLoot1, 2, 3);
@@ -212,7 +223,7 @@ namespace MoreWorldLocations
                 ClearArea = true,
                 RandomRotation = true,
                 Group = "Ruins_medium",
-                MinDistanceFromSimilar = 128,
+                MinDistanceFromSimilar = 512,
                 MaxTerrainDelta = 1f,
                 MinAltitude = 0f,
                 MinDistance = 1000,
@@ -268,7 +279,7 @@ namespace MoreWorldLocations
                 ClearArea = true,
                 RandomRotation = true,
                 Group = "Ruins_church",
-                MinDistanceFromSimilar = 128,
+                MinDistanceFromSimilar = 512,
                 MaxTerrainDelta = 1f,
                 MinAltitude = 0f,
                 MinDistance = 1000,
@@ -390,7 +401,7 @@ namespace MoreWorldLocations
                 ClearArea = true,
                 RandomRotation = true,
                 Group = "Ruins_tavern",
-                MinDistanceFromSimilar = 128,
+                MinDistanceFromSimilar = 512,
                 MaxTerrainDelta = 1f,
                 MinAltitude = 0f,
                 MinDistance = 1000,

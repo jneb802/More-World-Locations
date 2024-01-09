@@ -49,7 +49,7 @@ namespace MoreWorldLocations
 
             textManager = new TextManager();
             textManager.AddlocalizationsEnglish();
-            //textManager.JSONS();
+            //textManager.LoadTranslationJSONS();
 
 
             PrefabManager.OnVanillaPrefabsAvailable -= OnPrefabsAvailable;

@@ -72,7 +72,7 @@ namespace MoreWorldLocations
             });
         }
 
-        public void JSONS()
+        public void LoadTranslationJSONS()
         {
             if (translationBundle == null)
             {

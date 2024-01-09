@@ -1,19 +1,17 @@
 ﻿{
   "Locations": [
     {
-      "Name": "Ruins1",
-      "Biome": "Meadows",
-      "Quantity": 50,
-      "Priotized": true,
-      "ExteriorRadius": 5.0,
-      "ClearArea": true,
-      "RandomRotation": true,
-      "MaxTerrainDelta": 1.0,
-      "MinAltitude": 0.0,
-      "InForest": true,
-      "ForestTresholdMin": 0,
-      "ForestTrasholdMax": 1
+      "Ruins1LocationConfig": {
+        "Heightmap.Biome": "Meadows",
+        "Quantity": 50
+        // ... other settings
+      },
+      "Ruins2LocationConfig": {
+        "Biome": "BlackForest",
+        "Quantity": 30
+        // ... other settings
+      }
+      // ... more locations
     }
-    // ... other locations
   ]
 }
