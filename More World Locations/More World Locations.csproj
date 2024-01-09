@@ -100,6 +100,9 @@
     <Reference Include="MonoMod.Utils, Version=22.1.29.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoMod.Utils.22.1.29.1\lib\net452\MonoMod.Utils.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -153,5 +156,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\JotunnLib.2.15.0\build\JotunnLib.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JotunnLib.2.15.0\build\JotunnLib.props'))" />
+    <Error Condition="!Exists('..\packages\ILRepack.Lib.MSBuild.Task.2.0.25\build\ILRepack.Lib.MSBuild.Task.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILRepack.Lib.MSBuild.Task.2.0.25\build\ILRepack.Lib.MSBuild.Task.targets'))" />
   </Target>
+  <Import Project="..\packages\ILRepack.Lib.MSBuild.Task.2.0.25\build\ILRepack.Lib.MSBuild.Task.targets" Condition="Exists('..\packages\ILRepack.Lib.MSBuild.Task.2.0.25\build\ILRepack.Lib.MSBuild.Task.targets')" />
 </Project>
