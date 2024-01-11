@@ -29,7 +29,8 @@ namespace PieceManager
             RugShader,
             GrassShader,
             CustomCreature,
-            UseUnityShader
+            UseUnityShader,
+            StaticRock
         }
 
         private static readonly Dictionary<GameObject, bool> ObjectToSwap;
@@ -166,6 +167,9 @@ namespace PieceManager
                             break;
                         case ShaderType.CustomCreature:
                             t.shader = Shader.Find("Custom/Creature");
+                            break;
+                        case ShaderType.StaticRock:
+                            t.shader = Shader.Find("Custom/StaticRock");
                             break;
                         case ShaderType.UseUnityShader:
                             if (Shader.Find(name) != null)
