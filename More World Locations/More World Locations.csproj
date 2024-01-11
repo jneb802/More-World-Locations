@@ -112,6 +112,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="assets\mwl_bundle" />
+    <EmbeddedResource Include="assets\mwl_bundle2" />
     <None Include="LocationConfigs.json" />
     <Compile Include="CreatureAdder.cs" />
     <Compile Include="LocationSpawner.cs" />
@@ -126,7 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <EmbeddedResource Include="assets\mwl_bundle" />
     <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
