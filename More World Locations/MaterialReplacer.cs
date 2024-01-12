@@ -4,6 +4,7 @@ using System.Linq;
 using HarmonyLib;
 using JetBrains.Annotations;
 using UnityEngine;
+using static Mono.Security.X509.X520;
 
 namespace PieceManager
 {
@@ -116,6 +117,19 @@ namespace PieceManager
                 int i = 0;
                 foreach (Material t in renderer.sharedMaterials)
                 {
+                    if (t == null)
+                    {
+                        Transform parent = renderer.gameObject.transform.parent;
+                        string parentName = parent != null ? parent.name : "No Parent";
+                        string grandParentName = parent != null && parent.parent != null ? parent.parent.name : "No Grandparent";
+                        string greatGrandParentName = parent != null && parent.parent != null && parent.parent.parent != null ? parent.parent.parent.name : "No Great-grandparent";
+                        string greatGreatGrandParentName = parent != null && parent.parent != null && parent.parent.parent != null && parent.parent.parent.parent != null ? parent.parent.parent.parent.name : "No Great-great-grandparent";
+
+                        Debug.LogWarning($"Renderer on GameObject '{renderer.gameObject.name}' (Parent: {parentName}, Grandparent: {grandParentName}, Great-grandparent: {greatGrandParentName}, Great-great-grandparent: {greatGreatGrandParentName}) has a null material at position {i}");
+                        i++;
+                        continue;
+                    }
+
                     string replacementString = jotunnPrefabFlag ? "JVLmock_" : "_REPLACE_";
                     if (!t.name.StartsWith(replacementString, StringComparison.Ordinal)) continue;
                     string matName = t.name.Replace(" (Instance)", string.Empty)
