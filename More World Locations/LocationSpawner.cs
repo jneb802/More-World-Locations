@@ -83,11 +83,12 @@ namespace MoreWorldLocations
         #region LootLists
         List<string> meadowsLoot1 = new List<string> { "Coins", "Flint", "Feathers", "LeatherScraps", "DeerHide" };
         List<string> meadowsLoot2 = new List<string> { "FineWood", "Bronze", "CopperOre", "Coins" };
-        List<string> shrineEikLoot1 = new List<string> { "Acorn", "Ruby", "Coins" };
         List<string> tavernLoot1 = new List<string> { "Honey", "DeerStew", "QueensJam", "MinceMeatSauce" };
         List<string> churchLoot1 = new List<string> { "FineWood", "AmberPearl", "SilverNecklace", "Bronze" };
         List<string> blackforestLoot1 = new List<string> { "ArrowBronze", "CopperOre", "Amber", "Ruby", "AmberPearl", "Coins", "BoneFragments" };
+        List<string> blackforestLoot2 = new List<string> { "ArrowBronze", "Copper", "Ruby", "AmberPearl", "Coins", "Coal", "Tin" };
         List<string> swampLoot1 = new List<string> { "Amber", "AmberPearl", "Ruby", "Chain", "ElderBark", "IronScrap", "WitheredBone" };
+        List<string> plainsLoot1 = new List<string> { "Barley", "BlackMetalScrap", "Needle", "Coins" };
         #endregion
 
         public void AddLocations()
@@ -187,7 +188,7 @@ namespace MoreWorldLocations
             #endregion
 
             #region Ruins4
-            DropTable ruins4DropTable = LootManager.CreateDropTable(blackforestLoot1, 1, 3);
+            DropTable ruins4DropTable = LootManager.CreateDropTable(blackforestLoot1, 2, 3);
             LootManager.AddContainerToChild(Ruins4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", ruins4DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(Ruins4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
@@ -229,20 +230,20 @@ namespace MoreWorldLocations
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsArena1_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.Meadows, // Modify as needed
-                Quantity = 25,
+                Quantity = 10,
                 Priotized = true,
                 ExteriorRadius = 10f,
                 ClearArea = true,
                 RandomRotation = true,
                 Group = "Ruins_medium",
                 MinDistanceFromSimilar = 512,
-                MaxTerrainDelta = 1f,
+                MaxTerrainDelta = 1,
                 MinAltitude = 0f,
                 MinDistance = 1000,
                 MaxDistance = 2000,
                 InForest = false,
                 //ForestTrasholdMax = 1,
-                ForestTresholdMin = 3,
+                ForestTresholdMin = 1.5f,
             }));
             #endregion
 
@@ -272,10 +273,11 @@ namespace MoreWorldLocations
             #endregion
 
             #region RuinsChurch1
-            DropTable ruinsChurch1DropTable = LootManager.CreateDropTable(churchLoot1, 2, 4);
+            DropTable ruinsChurch1DropTable = LootManager.CreateDropTable(churchLoot1, 2, 3);
             LootManager.AddContainerToChild(RuinsChurch1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", ruinsChurch1DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(RuinsChurch1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsChurch1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsChurch1_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.CustomCreature);
             CreatureAdder.AddCreatureSpawnerToChild(RuinsChurch1_Prefab, "MWL_RuinsChurch1_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsChurch1_Prefab, "MWL_RuinsChurch1_Spawner2", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsChurch1_Prefab, "MWL_RuinsChurch1_Spawner3", "Skeleton");
@@ -393,15 +395,16 @@ namespace MoreWorldLocations
             #endregion
 
             #region Cathedral1
-            //DropTable tavern1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
-            //LootManager.AddContainerToChild(RuinsCathedral1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", meadowsLoot2);
-            //LootManager.AddContainerToChild(RuinsCathedral1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", meadowsLoot2);
+            DropTable Cathedral1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
+            LootManager.AddContainerToChild(RuinsCathedral1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", Cathedral1DropTable);
+            LootManager.AddContainerToChild(RuinsCathedral1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", Cathedral1DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(RuinsCathedral1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsCathedral1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsCathedral1_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsCathedral1_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.CustomCreature);
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCathedral1_Prefab, "MWL_RuinsCathedral1_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCathedral1_Prefab, "MWL_RuinsCathedral1_Spawner2", "Skeleton");
-            CreatureAdder.AddCreatureSpawnerToChild(RuinsCathedral1_Prefab, "MWL_RuinsCathedral1_Spawner3", "Skeleton");
+            CreatureAdder.AddCreatureSpawnerToChild(RuinsCathedral1_Prefab, "MWL_RuinsCathedral1_Spawner3", "Skeleton_Poison");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCathedral1_Prefab, "MWL_RuinsCathedral1_Spawner4", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCathedral1_Prefab, "MWL_RuinsCathedral1_Spawner5", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCathedral1_Prefab, "MWL_RuinsCathedral1_Spawner6", "Skeleton");
@@ -424,9 +427,8 @@ namespace MoreWorldLocations
             #endregion
 
             #region Cave2
-            //DropTable tavern1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
-            //LootManager.AddContainerToChild(RuinsCave2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", meadowsLoot2);
-            //LootManager.AddContainerToChild(RuinsCave2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", meadowsLoot2);
+            DropTable Cave2DropTable = LootManager.CreateDropTable(blackforestLoot1, 2, 3);
+            LootManager.AddContainerToChild(Cave2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone", Cave2DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(Cave2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(Cave2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             MaterialReplacer.RegisterGameObjectForShaderSwap(Cave2_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
@@ -449,12 +451,13 @@ namespace MoreWorldLocations
             #endregion*/
 
             #region RuinsArena2
-            //DropTable tavern1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
-            //LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", meadowsLoot2);
-            //LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", meadowsLoot2);
+            DropTable RuinsArena2DropTable = LootManager.CreateDropTable(plainsLoot1, 2, 3);
+            LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", RuinsArena2DropTable);
+            LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", RuinsArena2DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(RuinsArena2_Prefab.gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.UseUnityShader);
-            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.StaticRock);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.VegetationShader);;
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.UseUnityShader); ;
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner2", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner3", "Skeleton");
@@ -462,7 +465,7 @@ namespace MoreWorldLocations
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner5", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner6", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner7", "Skeleton");
-            CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner8", "Skeleton");
+            CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner8", "Skeleton_Poison");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner9", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner10", "Skeleton");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsArena2_Prefab, fixReference: false, new LocationConfig
@@ -484,7 +487,7 @@ namespace MoreWorldLocations
 
             #region RuinsArena3
             DropTable RuinsArena3DropTable = LootManager.CreateDropTable(meadowsLoot1, 2, 3);
-            LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", RuinsArena3DropTable);
+            LootManager.AddContainerToChild(RuinsArena3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", RuinsArena3DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(RuinsArena3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena3_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
@@ -511,9 +514,12 @@ namespace MoreWorldLocations
             #endregion
 
             #region RuinsCastle2
-            //DropTable tavern1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
-            //LootManager.AddContainerToChild(RuinsCastle2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", meadowsLoot2);
-            //LootManager.AddContainerToChild(RuinsCastle2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", meadowsLoot2);
+            DropTable RuinsCastle2DropTable1 = LootManager.CreateDropTable(plainsLoot1, 2, 3);
+            DropTable RuinsCastle2DropTable2 = LootManager.CreateDropTable(blackforestLoot2, 2, 3);
+            LootManager.AddContainerToChild(RuinsCastle2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood1", RuinsCastle2DropTable1);
+            LootManager.AddContainerToChild(RuinsCastle2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood2", RuinsCastle2DropTable1);
+            LootManager.AddContainerToChild(RuinsCastle2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood2", RuinsCastle2DropTable2);
+            LootManager.AddContainerToChild(RuinsCastle2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood2", RuinsCastle2DropTable2);
             MaterialReplacer.RegisterGameObjectForMatSwap(RuinsCastle2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsCastle2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCastle2_Prefab, "MWL_RuinsCastle2_Spawner1", "Skeleton");
@@ -546,9 +552,11 @@ namespace MoreWorldLocations
             #endregion
 
             #region RuinsCastle3
-            //DropTable tavern1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
-            //LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", meadowsLoot2);
-            //LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", meadowsLoot2);
+            DropTable RuinsCastle3DropTable1 = LootManager.CreateDropTable(blackforestLoot2, 2, 3);
+            DropTable RuinsCastle3DropTable2 = LootManager.CreateDropTable(blackforestLoot2, 2, 3);
+            LootManager.AddContainerToChild(RuinsCastle3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood1", RuinsCastle3DropTable1);
+            LootManager.AddContainerToChild(RuinsCastle3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood2", RuinsCastle3DropTable1);
+            LootManager.AddContainerToChild(RuinsCastle3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood3", RuinsCastle3DropTable2);
             MaterialReplacer.RegisterGameObjectForMatSwap(RuinsCastle3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsCastle3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsCastle3_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.CustomCreature);
@@ -578,17 +586,17 @@ namespace MoreWorldLocations
             }));
             #endregion
 
-            #region RuinsCastle4
-            //DropTable tavern1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
-            //LootManager.AddContainerToChild(RuinsCastle4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", meadowsLoot2);
-            //LootManager.AddContainerToChild(RuinsCastle4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", meadowsLoot2);
-            MaterialReplacer.RegisterGameObjectForMatSwap(RuinsCastle4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+/*            #region RuinsCastle4
+            DropTable RuinsCastle4DropTable = LootManager.CreateDropTable(blackforestLoot2, 2, 3);
+            LootManager.AddContainerToChild(RuinsCastle4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", RuinsCastle4DropTable);
+            LootManager.AddContainerToChild(RuinsCastle4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone", RuinsCastle4DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(RuinsCastle4_Prefab.gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsCastle4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsCastle4_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.CustomCreature);
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCastle4_Prefab, "MWL_RuinsCastle4_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCastle4_Prefab, "MWL_RuinsCastle4_Spawner2", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCastle4_Prefab, "MWL_RuinsCastle4_Spawner3", "Skeleton");
-            CreatureAdder.AddCreatureSpawnerToChild(RuinsCastle4_Prefab, "MWL_RuinsCastle4_Spawner4", "Skeleton");
+            CreatureAdder.AddCreatureSpawnerToChild(RuinsCastle4_Prefab, "MWL_RuinsCastle4_Spawner4", "Skeleton_Poison");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCastle4_Prefab, "MWL_RuinsCastle4_Spawner6", "Skeleton");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsCastle4_Prefab, fixReference: false, new LocationConfig
             {
@@ -600,25 +608,26 @@ namespace MoreWorldLocations
                 RandomRotation = true,
                 Group = "Ruins_large",
                 MinDistanceFromSimilar = 1028,
-                MaxTerrainDelta = 1,
+                //MaxTerrainDelta = 1,
                 MinAltitude = -3,
-                MaxAltitude = 0,
+                MaxAltitude = 0.5f,
                 MinDistance = 2500,
                 MaxDistance = 4000,
             }));
-            #endregion
+            #endregion*/
 
             #region RuinsTower6
-            //DropTable tavern1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
-            //LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", meadowsLoot2);
-            //LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", meadowsLoot2);
+            DropTable RuinsTower6DropTable = LootManager.CreateDropTable(blackforestLoot2, 2, 3);
+            LootManager.AddContainerToChild(RuinsTower6_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", RuinsTower6DropTable);
+            LootManager.AddContainerToChild(RuinsTower6_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", RuinsTower6DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(RuinsTower6_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsTower6_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsTower6_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsTower6_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.UseUnityShader);
             CreatureAdder.AddCreatureSpawnerToChild(RuinsTower6_Prefab, "MWL_RuinsTower6_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsTower6_Prefab, "MWL_RuinsTower6_Spawner2", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsTower6_Prefab, "MWL_RuinsTower6_Spawner3", "Skeleton");
-            CreatureAdder.AddCreatureSpawnerToChild(RuinsTower6_Prefab, "MWL_RuinsTower6_Spawner4", "Skeleton");
+            CreatureAdder.AddCreatureSpawnerToChild(RuinsTower6_Prefab, "MWL_RuinsTower6_Spawner4", "Skeleton_Poison");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsTower6_Prefab, "MWL_RuinsTower6_Spawner5", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsTower6_Prefab, "MWL_RuinsTower6_Spawner6", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsTower6_Prefab, "MWL_RuinsTower6_Spawner7", "Skeleton");
@@ -645,9 +654,8 @@ namespace MoreWorldLocations
             #endregion
 
             #region RuinsTower8
-            //DropTable tavern1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
-            //LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", meadowsLoot2);
-            //LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", meadowsLoot2);
+            DropTable RuinsTower8DropTable = LootManager.CreateDropTable(blackforestLoot1, 2, 3);
+            LootManager.AddContainerToChild(RuinsTower8_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", RuinsTower8DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(RuinsTower8_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsTower8_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsTower8_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
@@ -665,26 +673,23 @@ namespace MoreWorldLocations
                 SnapToWater = true,
                 Group = "Ruins_medium",
                 MinDistanceFromSimilar = 512,
-                MaxTerrainDelta = 1,
+                //MaxTerrainDelta = 1,
                 MinAltitude = -5,
-                MaxAltitude = -1,
+                MaxAltitude = 1,
                 MinDistance = 500,
                 MaxDistance = 2000,
             }));
             #endregion
 
             #region WoodHideout1
-            //DropTable tavern1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
-            //LootManager.AddContainerToChild(WoodHideout1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", meadowsLoot2);
-            //LootManager.AddContainerToChild(WoodHideout1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", meadowsLoot2);
             MaterialReplacer.RegisterGameObjectForMatSwap(WoodHideout1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(WoodHideout1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             MaterialReplacer.RegisterGameObjectForShaderSwap(WoodHideout1_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
-            CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner1", "Skeleton");
-            CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner2", "Skeleton");
-            CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner3", "Skeleton");
-            CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner4", "Skeleton");
-            CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner5", "Skeleton");
+            CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner1", "Greydwarf");
+            CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner2", "Greydwarf");
+            CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner3", "Greydwarf");
+            CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner4", "Greydwarf_Elite");
+            CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner5", "Greydwarf_Shaman");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(WoodHideout1_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.BlackForest,
@@ -697,16 +702,15 @@ namespace MoreWorldLocations
                 Group = "Environment_medium",
                 MinDistanceFromSimilar = 512,
                 MaxTerrainDelta = 1,
-                MinAltitude = 5,
+                MinAltitude = 0,
                 MinDistance = 500,
                 MaxDistance = 2000,
             }));
             #endregion
 
             #region WoodTower1
-            //DropTable tavern1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
-            //LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", meadowsLoot2);
-            //LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", meadowsLoot2);
+            DropTable WoodTower1DropTable = LootManager.CreateDropTable(blackforestLoot1, 2, 3);
+            LootManager.AddContainerToChild(WoodTower1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", WoodTower1DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(WoodTower1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(WoodTower1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             CreatureAdder.AddCreatureSpawnerToChild(WoodTower1_Prefab, "MWL_WoodTower1_Spawner1", "Skeleton");
@@ -733,14 +737,13 @@ namespace MoreWorldLocations
             #endregion
 
             #region WoodTower2
-            //DropTable tavern1DropTable = LootManager.CreateDropTable(meadowsLoot2, 2, 3);
-            //LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", meadowsLoot2);
-            //LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", meadowsLoot2);
+            DropTable WoodTower2DropTable = LootManager.CreateDropTable(blackforestLoot1, 2, 3);
+            LootManager.AddContainerToChild(WoodTower2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", WoodTower2DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(WoodTower2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(WoodTower2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
-            CreatureAdder.AddCreatureSpawnerToChild(WoodTower2_Prefab, "MWL_WoodTower2_Spawner1", "Skeleton");
-            CreatureAdder.AddCreatureSpawnerToChild(WoodTower2_Prefab, "MWL_WoodTower2_Spawner2", "Skeleton");
-            CreatureAdder.AddCreatureSpawnerToChild(WoodTower2_Prefab, "MWL_WoodTower2_Spawner3", "Skeleton");
+            CreatureAdder.AddCreatureSpawnerToChild(WoodTower2_Prefab, "MWL_WoodTower2_Spawner1", "Greydwarf");
+            CreatureAdder.AddCreatureSpawnerToChild(WoodTower2_Prefab, "MWL_WoodTower2_Spawner2", "Greydwarf");
+            CreatureAdder.AddCreatureSpawnerToChild(WoodTower2_Prefab, "MWL_WoodTower2_Spawner3", "Greydwarf");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(WoodTower2_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.BlackForest,

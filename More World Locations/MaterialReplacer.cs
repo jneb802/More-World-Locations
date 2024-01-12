@@ -182,9 +182,6 @@ namespace PieceManager
                         case ShaderType.CustomCreature:
                             t.shader = Shader.Find("Custom/Creature");
                             break;
-                        case ShaderType.StaticRock:
-                            t.shader = Shader.Find("Custom/StaticRock");
-                            break;
                         case ShaderType.UseUnityShader:
                             if (Shader.Find(name) != null)
                             {
