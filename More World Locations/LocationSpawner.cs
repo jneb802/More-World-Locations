@@ -24,6 +24,7 @@ namespace MoreWorldLocations
 
         public AssetBundle locationsBundle;
         public AssetBundle locationsBundle2;
+        public AssetBundle locationsBundle3;
         public GameObject Ruins1_Prefab;
         public GameObject Ruins2_Prefab;
         public GameObject Ruins3_Prefab;
@@ -47,11 +48,18 @@ namespace MoreWorldLocations
         public GameObject WoodHideout1_Prefab;
         public GameObject WoodTower1_Prefab;
         public GameObject WoodTower2_Prefab;
+        public GameObject WoodTower3_Prefab;
+        public GameObject Ruins4_Prefab;
+        public GameObject Ruins5_Prefab;
+        public GameObject Ruins6_Prefab;
+        public GameObject SwampCircle1_Prefab;
+        public GameObject RuinsWell1_Prefab;
 
         public void LoadAssets()
         {
             locationsBundle = AssetUtils.LoadAssetBundleFromResources("mwl_bundle");
             locationsBundle2 = AssetUtils.LoadAssetBundleFromResources("mwl_bundle2");
+            locationsBundle2 = AssetUtils.LoadAssetBundleFromResources("mwl_bundle3");
             Ruins1_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_Ruins1");
             Ruins2_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_Ruins2");
             Ruins3_Prefab = locationsBundle?.LoadAsset<GameObject>("MWL_Ruins3");
@@ -75,6 +83,13 @@ namespace MoreWorldLocations
             WoodHideout1_Prefab = locationsBundle2?.LoadAsset<GameObject>("MWL_WoodHideout1");
             WoodTower1_Prefab = locationsBundle2?.LoadAsset<GameObject>("MWL_WoodTower1");
             WoodTower2_Prefab = locationsBundle2?.LoadAsset<GameObject>("MWL_WoodTower2");
+            WoodTower3_Prefab = locationsBundle2?.LoadAsset<GameObject>("MWL_WoodTower3");
+            Ruins4_Prefab = locationsBundle3?.LoadAsset<GameObject>("MWL_Ruins4");
+            Ruins5_Prefab = locationsBundle3?.LoadAsset<GameObject>("MWL_Ruins4");
+            Ruins6_Prefab = locationsBundle3?.LoadAsset<GameObject>("MWL_Ruins4");
+            SwampCircle1_Prefab = locationsBundle3?.LoadAsset<GameObject>("MWL_SwampCircle1");
+            RuinsWell1_Prefab = locationsBundle3?.LoadAsset<GameObject>("MWL_RuinsWell1");
+
 
             LogResourceNamesAndCheckErrors();
         }
@@ -129,7 +144,7 @@ namespace MoreWorldLocations
             }));
             #endregion
 
-            #region Ruins2
+/*            #region Ruins2
             DropTable ruins2DropTable = LootManager.CreateDropTable(meadowsLoot1, 2, 3);
             LootManager.AddContainerToChild(Ruins2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", ruins2DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(Ruins2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
@@ -432,7 +447,6 @@ namespace MoreWorldLocations
             MaterialReplacer.RegisterGameObjectForMatSwap(Cave2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(Cave2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             MaterialReplacer.RegisterGameObjectForShaderSwap(Cave2_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
-            //CreatureAdder.AddCreatureSpawnerToChild(RuinsCave2_Prefab, "MWL_Cathedral1_Spawner1", "Skeleton");
             ZoneManager.Instance.AddCustomLocation(new CustomLocation(Cave2_Prefab, fixReference: false, new LocationConfig
             {
                 Biome = Heightmap.Biome.BlackForest, // Modify as needed
@@ -450,14 +464,14 @@ namespace MoreWorldLocations
             }));
             #endregion*/
 
-            #region RuinsArena2
+/*            #region RuinsArena2
             DropTable RuinsArena2DropTable = LootManager.CreateDropTable(plainsLoot1, 2, 3);
             LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone1", RuinsArena2DropTable);
             LootManager.AddContainerToChild(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone2", RuinsArena2DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(RuinsArena2_Prefab.gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.UseUnityShader);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.VegetationShader);;
-            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.UseUnityShader); ;
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsArena2_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.CustomCreature); ;
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner2", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsArena2_Prefab, "MWL_RuinsArena2_Spawner3", "Skeleton");
@@ -584,13 +598,13 @@ namespace MoreWorldLocations
                 MinDistance = 1500,
                 MaxDistance = 3000,
             }));
-            #endregion
+            #endregion*/
 
-/*            #region RuinsCastle4
+            #region RuinsCastle4
             DropTable RuinsCastle4DropTable = LootManager.CreateDropTable(blackforestLoot2, 2, 3);
             LootManager.AddContainerToChild(RuinsCastle4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", RuinsCastle4DropTable);
             LootManager.AddContainerToChild(RuinsCastle4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_stone", RuinsCastle4DropTable);
-            MaterialReplacer.RegisterGameObjectForMatSwap(RuinsCastle4_Prefab.gameObject);
+            MaterialReplacer.RegisterGameObjectForMatSwap(RuinsCastle4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsCastle4_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsCastle4_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.CustomCreature);
             CreatureAdder.AddCreatureSpawnerToChild(RuinsCastle4_Prefab, "MWL_RuinsCastle4_Spawner1", "Skeleton");
@@ -614,7 +628,7 @@ namespace MoreWorldLocations
                 MinDistance = 2500,
                 MaxDistance = 4000,
             }));
-            #endregion*/
+            #endregion
 
             #region RuinsTower6
             DropTable RuinsTower6DropTable = LootManager.CreateDropTable(blackforestLoot2, 2, 3);
@@ -623,7 +637,7 @@ namespace MoreWorldLocations
             MaterialReplacer.RegisterGameObjectForMatSwap(RuinsTower6_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsTower6_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
             MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsTower6_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
-            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsTower6_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.UseUnityShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsTower6_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.CustomCreature);
             CreatureAdder.AddCreatureSpawnerToChild(RuinsTower6_Prefab, "MWL_RuinsTower6_Spawner1", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsTower6_Prefab, "MWL_RuinsTower6_Spawner2", "Skeleton");
             CreatureAdder.AddCreatureSpawnerToChild(RuinsTower6_Prefab, "MWL_RuinsTower6_Spawner3", "Skeleton");
@@ -653,7 +667,7 @@ namespace MoreWorldLocations
             }));
             #endregion
 
-            #region RuinsTower8
+/*            #region RuinsTower8
             DropTable RuinsTower8DropTable = LootManager.CreateDropTable(blackforestLoot1, 2, 3);
             LootManager.AddContainerToChild(RuinsTower8_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", RuinsTower8DropTable);
             MaterialReplacer.RegisterGameObjectForMatSwap(RuinsTower8_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
@@ -670,21 +684,22 @@ namespace MoreWorldLocations
                 ExteriorRadius = 12,
                 ClearArea = true,
                 RandomRotation = true,
-                SnapToWater = true,
+                //SnapToWater = true,
                 Group = "Ruins_medium",
                 MinDistanceFromSimilar = 512,
                 //MaxTerrainDelta = 1,
-                MinAltitude = -5,
-                MaxAltitude = 1,
+                MinAltitude = -2,
+                MaxAltitude = 4,
                 MinDistance = 500,
                 MaxDistance = 2000,
             }));
-            #endregion
+            #endregion*/
 
-            #region WoodHideout1
-            MaterialReplacer.RegisterGameObjectForMatSwap(WoodHideout1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+/*            #region WoodHideout1
+            MaterialReplacer.RegisterGameObjectForMatSwap(WoodHideout1_Prefab.gameObject);
             MaterialReplacer.RegisterGameObjectForShaderSwap(WoodHideout1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
-            MaterialReplacer.RegisterGameObjectForShaderSwap(WoodHideout1_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(WoodHideout1_Prefab.gameObject.transform.FindDeepChild("Vegetation").gameObject, MaterialReplacer.ShaderType.StaticRock);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(WoodHideout1_Prefab.gameObject.transform.FindDeepChild("Ore").gameObject, MaterialReplacer.ShaderType.UseUnityShader);
             CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner1", "Greydwarf");
             CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner2", "Greydwarf");
             CreatureAdder.AddCreatureSpawnerToChild(WoodHideout1_Prefab, "MWL_WoodHideout1_Spawner3", "Greydwarf");
@@ -706,7 +721,7 @@ namespace MoreWorldLocations
                 MinDistance = 500,
                 MaxDistance = 2000,
             }));
-            #endregion
+            #endregion*/
 
             #region WoodTower1
             DropTable WoodTower1DropTable = LootManager.CreateDropTable(blackforestLoot1, 2, 3);
@@ -759,6 +774,170 @@ namespace MoreWorldLocations
                 MinAltitude = 0,
                 MinDistance = 1500,
                 MaxDistance = 3000,
+            }));
+            #endregion
+
+            #region WoodTower3
+            DropTable WoodTower3DropTable = LootManager.CreateDropTable(blackforestLoot2, 2, 3);
+            LootManager.AddContainerToChild(WoodTower3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", WoodTower3DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(WoodTower3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(WoodTower3_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(WoodTower3_Prefab.gameObject.transform.FindDeepChild("Vegeation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(WoodTower3_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.CustomCreature);
+            CreatureAdder.AddCreatureSpawnerToChild(WoodTower3_Prefab, "MWL_WoodTower3_Spawner1", "Greydwarf");
+            CreatureAdder.AddCreatureSpawnerToChild(WoodTower3_Prefab, "MWL_WoodTower3_Spawner2", "Greydwarf");
+            CreatureAdder.AddCreatureSpawnerToChild(WoodTower3_Prefab, "MWL_WoodTower3_Spawner3", "Greydwarf");
+            CreatureAdder.AddCreatureSpawnerToChild(WoodTower3_Prefab, "MWL_WoodTower3_Spawner4", "Greydwarf_Elite");
+            CreatureAdder.AddCreatureSpawnerToChild(WoodTower3_Prefab, "MWL_WoodTower3_Spawner5", "Greydwarf_Shamman");
+            ZoneManager.Instance.AddCustomLocation(new CustomLocation(WoodTower3_Prefab, fixReference: false, new LocationConfig
+            {
+                Biome = Heightmap.Biome.BlackForest,
+                //BiomeArea = Heightmap.BiomeArea.Edge,
+                Quantity = 10,
+                Priotized = true,
+                ExteriorRadius = 24,
+                ClearArea = true,
+                RandomRotation = true,
+                Group = "Wood_medium",
+                MinDistanceFromSimilar = 512,
+                //MaxTerrainDelta = 5,
+                MinAltitude = 0,
+                MinDistance = 1500,
+                MaxDistance = 3000,
+            }));
+            #endregion
+
+            #region Ruins6
+            DropTable Ruins6DropTable = LootManager.CreateDropTable(blackforestLoot2, 2, 3);
+            LootManager.AddContainerToChild(Ruins6_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", Ruins6DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(Ruins6_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins6_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins6_Prefab.gameObject.transform.FindDeepChild("Vegeation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
+            CreatureAdder.AddCreatureSpawnerToChild(Ruins6_Prefab, "MWL_Ruins6_Spawner1", "Skeleton");
+            CreatureAdder.AddCreatureSpawnerToChild(Ruins6_Prefab, "MWL_Ruins6_Spawner2", "Skeleton");
+            CreatureAdder.AddCreatureSpawnerToChild(Ruins6_Prefab, "MWL_Ruins6_Spawner3", "Skeleton");
+            ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins6_Prefab, fixReference: false, new LocationConfig
+            {
+                Biome = Heightmap.Biome.Meadows,
+                //BiomeArea = Heightmap.BiomeArea.Edge,
+                Quantity = 5,
+                Priotized = true,
+                ExteriorRadius = 14,
+                ClearArea = true,
+                RandomRotation = true,
+                Group = "Ruins_small",
+                MinDistanceFromSimilar = 256,
+                //MaxTerrainDelta = 5,
+                MinAltitude = 0,
+                MinDistance = 500,
+                MaxDistance = 2000,
+            }));
+            #endregion
+
+            #region Ruins7
+            DropTable Ruins7DropTable = LootManager.CreateDropTable(meadowsLoot1, 2, 3);
+            LootManager.AddContainerToChild(Ruins7_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", Ruins7DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(Ruins7_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins7_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins7_Prefab.gameObject.transform.FindDeepChild("Vegeation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
+            CreatureAdder.AddCreatureSpawnerToChild(Ruins7_Prefab, "MWL_Ruins7_Spawner1", "Skeleton");
+            CreatureAdder.AddCreatureSpawnerToChild(Ruins7_Prefab, "MWL_Ruins7_Spawner2", "Skeleton");
+            CreatureAdder.AddCreatureSpawnerToChild(Ruins7_Prefab, "MWL_Ruins7_Spawner3", "Skeleton");
+            ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins7_Prefab, fixReference: false, new LocationConfig
+            {
+                Biome = Heightmap.Biome.Meadows,
+                //BiomeArea = Heightmap.BiomeArea.Edge,
+                Quantity = 2,
+                Priotized = true,
+                ExteriorRadius = 7,
+                ClearArea = true,
+                RandomRotation = true,
+                Group = "Ruins_medium",
+                MinDistanceFromSimilar = 512,
+                //MaxTerrainDelta = 5,
+                MinAltitude = 0,
+                //MinDistance = 1500,
+                MaxDistance = 500,
+            }));
+            #endregion
+
+            #region Ruins8
+            DropTable Ruins8DropTable = LootManager.CreateDropTable(blackforestLoot1, 2, 3);
+            LootManager.AddContainerToChild(Ruins8_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", Ruins8DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(Ruins8_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins8_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(Ruins8_Prefab.gameObject.transform.FindDeepChild("Vegeation").gameObject, MaterialReplacer.ShaderType.VegetationShader);
+            CreatureAdder.AddCreatureSpawnerToChild(Ruins8_Prefab, "MWL_Ruins8_Spawner1", "Greydwarf_Elite");
+            CreatureAdder.AddCreatureSpawnerToChild(Ruins8_Prefab, "MWL_Ruins8_Spawner2", "Greydwarf");
+            CreatureAdder.AddCreatureSpawnerToChild(Ruins8_Prefab, "MWL_Ruins8_Spawner3", "Greydwarf");
+            ZoneManager.Instance.AddCustomLocation(new CustomLocation(Ruins8_Prefab, fixReference: false, new LocationConfig
+            {
+                Biome = Heightmap.Biome.BlackForest,
+                //BiomeArea = Heightmap.BiomeArea.Edge,
+                Quantity = 5,
+                Priotized = true,
+                ExteriorRadius = 11,
+                ClearArea = true,
+                RandomRotation = true,
+                Group = "Ruins_medium",
+                MinDistanceFromSimilar = 256,
+                //MaxTerrainDelta = 5,
+                MinAltitude = 0,
+                MinDistance = 500,
+                MaxDistance = 2000,
+            }));
+            #endregion
+
+            #region RuinsWell1
+            DropTable RuinsWell1DropTable = LootManager.CreateDropTable(meadowsLoot1, 2, 3);
+            LootManager.AddContainerToChild(RuinsWell1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", RuinsWell1DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(RuinsWell1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(RuinsWell1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
+            ZoneManager.Instance.AddCustomLocation(new CustomLocation(RuinsWell1_Prefab, fixReference: false, new LocationConfig
+            {
+                Biome = Heightmap.Biome.Meadows,
+                //BiomeArea = Heightmap.BiomeArea.Edge,
+                Quantity = 1,
+                Priotized = true,
+                ExteriorRadius = 7,
+                ClearArea = true,
+                RandomRotation = true,
+                Group = "Ruins_small",
+                MinDistanceFromSimilar = 256,
+                //MaxTerrainDelta = 5,
+                MinAltitude = 0,
+                //MinDistance = 500,
+                MaxDistance = 500,
+            }));
+            #endregion
+
+            #region SwampCircle1
+            DropTable SwampCircle1DropTable = LootManager.CreateDropTable(meadowsLoot1, 2, 3);
+            LootManager.AddContainerToChild(SwampCircle1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, "loot_chest_wood", RuinsWell1DropTable);
+            MaterialReplacer.RegisterGameObjectForMatSwap(SwampCircle1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(SwampCircle1_Prefab.gameObject.transform.FindDeepChild("Blueprint").gameObject, MaterialReplacer.ShaderType.PieceShader);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(SwampCircle1_Prefab.gameObject.transform.FindDeepChild("Rock").gameObject, MaterialReplacer.ShaderType.StaticRock);
+            MaterialReplacer.RegisterGameObjectForShaderSwap(SwampCircle1_Prefab.gameObject.transform.FindDeepChild("Creature").gameObject, MaterialReplacer.ShaderType.CustomCreature);
+            CreatureAdder.AddCreatureSpawnerToChild(SwampCircle1_Prefab, "MWL_SwampCircle1_Prefab_Spawner1", "Draugr");
+            CreatureAdder.AddCreatureSpawnerToChild(SwampCircle1_Prefab, "MWL_SwampCircle1_Prefab_Spawner2", "Draugr");
+            CreatureAdder.AddCreatureSpawnerToChild(SwampCircle1_Prefab, "MWL_SwampCircle1_Prefab_Spawner3", "Draugr");
+            CreatureAdder.AddCreatureSpawnerToChild(SwampCircle1_Prefab, "MWL_SwampCircle1_Prefab_Spawner4", "Draugr");
+            CreatureAdder.AddCreatureSpawnerToChild(SwampCircle1_Prefab, "MWL_SwampCircle1_Prefab_Spawner5", "Draugr_Elite");
+            ZoneManager.Instance.AddCustomLocation(new CustomLocation(SwampCircle1_Prefab, fixReference: false, new LocationConfig
+            {
+                Biome = Heightmap.Biome.Swamp,
+                //BiomeArea = Heightmap.BiomeArea.Edge,
+                Quantity = 10,
+                Priotized = true,
+                ExteriorRadius = 7,
+                ClearArea = true,
+                RandomRotation = true,
+                Group = "Swamp_circle",
+                MinDistanceFromSimilar = 512,
+                //MaxTerrainDelta = 5,
+                MinAltitude = 0.5f,
+                //MinDistance = 0,
+                MaxDistance = 4000,
             }));
             #endregion
 
